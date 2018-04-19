@@ -2,9 +2,15 @@
 set -x
 set -e
 
-# export THEANO_FLAGS=mode=FAST_RUN,device=gpu,floatX=float32,nvcc.flags=-D_FORCE_INLINES,nvcc.flags=-arch=sm_60
-export THEANO_FLAGS=mode=FAST_RUN,device=cpu,floatX=float32
-export PROJ_BASE_PATH="/root"
+export THEANO_FLAGS=mode=FAST_RUN,device=cuda*,floatX=float32
+export MKL_THREADING_LAYER=GNU
+# export THEANO_FLAGS=mode=FAST_RUN,device=cpu,floatX=float32
+
+if [[ $USER == "rice" ]]; then
+  export PROJ_BASE_PATH="/home/rice/cvprclg/"
+elif [[ $USER == "root" ]]; then
+  export PROJ_BASE_PATH="/root"
+fi
 
 TRAIN_PATH_LIST="
 $PROJ_BASE_PATH/data/train/AOI_4_Shanghai_Train
@@ -19,7 +25,7 @@ $PROJ_BASE_PATH/data/train/AOI_4_Shanghai_Train
 # rm -rf /home/rice/projects/BuildingDetectors_Round2/1-XD_XD/data/working/images/v16
 # rm -rf /home/rice/projects/BuildingDetectors_Round2/1-XD_XD/data/working/images/
 
-source activate py35
+# source activate py35
 
 for train_path in $TRAIN_PATH_LIST; do
   echo $train_path
