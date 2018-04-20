@@ -3,8 +3,9 @@
 nvidia-docker run \
     --rm \
     --name cvpr-${USER} \
-    -v /home/rice/cvprclg/data/:/root/data/ \
-    -v /home/rice/cvprclg/code/:/root/code/ \
-    -v /home/rice/cvprclg/util/visualizer-2.0/:/root/visualizer-2.0/ \
-    -ti rice-sol \
-    bash
+    -v ${HOME}/cvprclg/data/:/root/data/ \
+    -v ${HOME}/cvprclg/code/:/root/code/ \
+    -v ${HOME}/cvprclg/util/visualizer-2.0/:/root/visualizer-2.0/ \
+    --workdir=/root/code \
+    -ti unetsol \
+    ./test.sh
