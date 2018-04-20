@@ -339,6 +339,11 @@ def _internal_pred_to_poly_file_test(area_id,
     if not Path(fn_out).parent.exists():
         Path(fn_out).parent.mkdir(parents=True)
 
+    # save prediction result to file (as numpy array)
+    np_fn = fn_out.replace('csv', 'npy')
+    np.save(np_fn, y_pred)
+    logger.info('saved y_pred to numpy file: {}'.format(np_fn))
+
     # Ensemble individual models and write out output files
     with open(fn_out, 'w') as f:
         f.write("ImageId,BuildingId,PolygonWKT_Pix,Confidence\n")
@@ -542,10 +547,10 @@ def testproc(datapath):
     # Predict first
     logger.info("Prediction phase (v9s)")
     y_pred_0 = v9s._internal_test_predict_best_param(
-        area_id, save_pred=False)
+        area_id, save_pred=True)
     logger.info("Prediction phase (v13)")
     y_pred_1 = v13._internal_test_predict_best_param(
-        area_id, save_pred=False)
+        area_id, save_pred=True)
     # logger.info("Prediction phase (v16)")
     # y_pred_2 = v16._internal_test_predict_best_param(
     #     area_id, save_pred=False)

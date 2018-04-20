@@ -617,9 +617,9 @@ def preproc_test(datapath):
 
     # Image HDF5 store (MUL)
     if Path(FMT_TEST_MUL_STORE.format(prefix)).exists():
-        logger.info("Generate MUL_STORE (test) ... skip")
+        logger.info("Generate TEST MUL_STORE (test) ... skip")
     else:
-        logger.info("Generate MUL_STORE (test)")
+        logger.info("Generate TEST MUL_STORE (test)")
         prep_mul_image_store_test(area_id, datapath)
 
     logger.info("preproc_test for {} ... done".format(prefix))

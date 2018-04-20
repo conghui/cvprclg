@@ -1057,7 +1057,7 @@ def _internal_test_predict_best_param(area_id,
     # Prediction phase
     logger.info("Prediction phase: {}".format(prefix))
 
-    X_mean = get_mul_mean_image(area_id)
+    X_mean = get_mul_mean_image(area_id) # read multispectral images
 
     # Load model weights
     # Predict and Save prediction result
@@ -1080,6 +1080,12 @@ def _internal_test_predict_best_param(area_id,
         val_samples=len(df_test),
     )
     del model
+
+    # save prediction result to file (as numpy array)
+    np_fn = fn.replace('h5', 'npy')
+    np.save(np_fn, y_pred)
+    logger.info('saved y_pred to numpy file: {}'.format(np_fn))
+
 
     # Save prediction result
     if save_pred:

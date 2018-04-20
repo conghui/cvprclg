@@ -586,6 +586,7 @@ def prep_valtrain_valtest_imagelist(area_id):
         index=False)
 
 
+# enumerate PAN directory and write image names of cvs
 def prep_test_imagelist(area_id, datapath):
     prefix = area_id_to_prefix(area_id)
 
@@ -740,14 +741,14 @@ def preproc_train(datapath):
 
     # Imagelist
     if Path(FMT_VALTRAIN_IMAGELIST_PATH.format(prefix=prefix)).exists():
-        logger.info("Generate IMAGELIST csv ... skip")
+        logger.info("Generate VALTRAIN IMAGELIST csv ... skip")
     else:
-        logger.info("Generate IMAGELIST csv")
+        logger.info("Generate VALTRAIN IMAGELIST csv")
         prep_valtrain_valtest_imagelist(area_id)
     if Path(FMT_VALTEST_IMAGELIST_PATH.format(prefix=prefix)).exists():
-        logger.info("Generate IMAGELIST csv ... skip")
+        logger.info("Generate VALTEST IMAGELIST csv ... skip")
     else:
-        logger.info("Generate IMAGELIST csv")
+        logger.info("Generate VALTEST IMAGELIST csv")
         prep_valtrain_valtest_imagelist(area_id)
 
     # Band stats (RGB)
@@ -828,9 +829,9 @@ def preproc_test(datapath):
 
     # Imagelist
     if Path(FMT_TEST_IMAGELIST_PATH.format(prefix=prefix)).exists():
-        logger.info("Generate IMAGELIST for inference ... skip")
+        logger.info("Generate TEST IMAGELIST for inference ... skip")
     else:
-        logger.info("Generate IMAGELIST for inference")
+        logger.info("Generate TEST IMAGELIST for inference")
         prep_test_imagelist(area_id, datapath)
 
     # Image HDF5 store (RGB)

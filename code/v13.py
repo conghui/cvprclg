@@ -340,6 +340,11 @@ def _internal_test_predict_best_param(area_id,
     )
     del model
 
+    # save prediction result to file (as numpy array)
+    np_fn = fn.replace('h5', 'npy')
+    np.save(np_fn, y_pred)
+    logger.info('saved y_pred to numpy file: {}'.format(np_fn))
+
     # Save prediction result
     if save_pred:
         with tb.open_file(fn, 'w') as f:
